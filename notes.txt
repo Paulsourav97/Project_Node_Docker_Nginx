@@ -1,0 +1,108 @@
+Project:
+Creating a project using node.js app.
+Dockerize it.
+Run on 3 instances in docker container and use Nginx as load balancer
+Secure Https connection with self-signed certificate
+
+==========================================================
+
+Client <=> Server <=> Http Request <=> Send Response
+One Server handles millions of Request
+So we installed multiple servers. Hence there was a need to understand
+which servers will handle the request.
+This depends on the Algo : Like least connection, Round Robin.
+
+Nginx as Proxy Server: 
+All server stores data in the server that is publicly
+available. Accepts encrypted traffic and sends it to the server.
+Caching: 
+
+Example of netflix - Friday night. Millions of users watching
+the content. Nginx can compress the bandwidth and send the data.
+
+
+========================================
+
+
+Project:  
+1. Dockerize Node.js app
+2. Run 3 Web Server on local server
+3. Install Nginx – Configure Reverse Proxy to Load Balancing on 3 Web Servers
+4. Secure HTTPS:// connection with Self-Signed Certificate
+
+
+Stacks Used : Nginx, Node.Js, Docker
+=======================================================
+Nginx – Proxy Server, Cache, Security.
+
+Browser requests and server after verifying sends back the webpage to be loaded.
+Millions of request. Need many servers. So soution is we create 1 Nginx server that
+points the load to ­which server(least conn/round robin)
+
+New comes all user access. Webpage can be loaded in the nginx server which is served 
+to the browser.
+
+Security: Encrypted transmission. Nginx server will decrypt and pass it on the webserver
+
+Netflix uses Nginx as web server. 
+Friday night everyone watching. Milliions of request is sent to netflix. High quality video needs to be sent to millions of people which requires huge bandwidth. 
+Nginx Proxy can compress the response to reduce the bandwidth. Sending response in chunks.
+Like you watched the next data will load.
+
+Nginx is the ingress controller for Kubernetes.
+
+How do you configure this?
+Nginx.conf – here is where we define
+
+Each cloud has their own load balance why we need Nginx? 
+We need both. Nginx is used inside the cluster. You cannot access from the browser.
+AWS load balancer. Request on AWS loadbalcing and routes to the server.
+
+Apache vs Nginx
+=============
+
+Pretty much the same. Apache also has proxy.
+Nginx is faster and lightweight.
+
+======================================================
+
+How to do it ???
+
+So we start by creating a index.html and a backend server that serves nodejs. 
+We create package.json to install all the dependencies.
+Then create docker image that runs on 3000.
+
+Commands
+docker build -t myapp:1.0
+This will start creating the docker image.
+But its still not running on any port.
+
+Lets git push here! - Done
+login, add remote url, git init, add .gitignore, push
+
+Ok We created docker-compose.yml file
+Where we are writing the logic to map the ports.
+App1:3001:3000, App2:3002:3000
+
+docker-compose up --build -d 
+
+App is not running on 3000. Instead 3001 ...
+
+Configuring nginx as Proxy server.
+Load Balancer + Encryption
+
+docker-compose up --build to check which app serving the site
+
+
+Configuring Secure SSL connection - HTTPS://
+
+Generate SSL/TLS certificate
+Self-Signed certificate
+But for production it is authenticated by Certificate Authority. Trusted by browser.
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx-selfsigned.key -out nginx-selfsigned.crt
+
+Change the nginx.conf file 
+to check nginx cong - nginx -t
+
+At last we configured in the nginx.conf for 8080. Using redirection. Whenever access 8080 it will re-direct to 443

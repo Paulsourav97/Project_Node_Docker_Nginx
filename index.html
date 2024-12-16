@@ -1,114 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beautiful Landing Page</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Building a Scalable Web Application with Docker, Node.js, Nginx, and HTTPS</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        /* Basic Reset */
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
+            box-sizing: border-box;
         }
-        header {
-            background: url('images/career-quiz.png') no-repeat center center/cover;
-            color: #fff;
-            padding: 100px 0;
-            height: 150px;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 3em;
-            margin: 0;
-        }
-        header p {
-            font-size: 1.2em;
-        }
-        nav {
-            background: #333;
-            color: #fff;
-            display: flex;
-            justify-content: space-around;
-            padding: 15px 0;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .container {
+
+        /* Set background color and font color */
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
             padding: 20px;
         }
-        .grid {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            flex: 1;
-            min-width: 280px;
-            max-width: 300px;
-            padding: 15px;
-        }
-        .card img {
-            border-radius: 8px;
-            width: 100%;
-            height: auto;
-        }
-        footer {
-            background: #333;
-            color: #fff;
+
+        h1, h2 {
             text-align: center;
-            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 1.8rem;
             margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* Add spacing between sections */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        /* Style for important notes */
+        .important {
+            background-color: #444;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Style for lists */
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
         }
     </style>
 </head>
-
 <body>
-    <header>
-    </header>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#about">Best Courses</a>
-        <a href="#services">Fun Tutorials</a>
-        <a href="#contact">About TechWorld with Nana</a>
-    </nav>
-    <div class="container">
-        <h2>TechWorld with Nana Programs</h2>
-        <div class="grid">
-            <div class="card">
-                <img src="images/devops.png?crop=entropy&fit=crop&w=400&h=200" alt="Service 1">
-                <h3>DevOps Bootcamp</h3>
-                <p>Finally learn with structured guided course, all DevOps tools together</p>
-            </div>
-            <div class="card">
-                <img src="images/it-beginners.png?crop=entropy&fit=crop&w=400&h=200" alt="Service 2">
-                <h3>Software Development LifeCycle Course</h3>
-                <p>Learn the entire software Development lifecycle, from developing, to testing, to provisioning server and deploying</p>
-            </div>
-            <div class="card">
-                <img src="images/devsecops.png?crop=entropy&fit=crop&w=400&h=200" alt="Service 3">
-                <h3>DevSecOps Bootcamp</h3>
-                <p>If you wanna become a DevOps engineer on steroids, you can face this advanced bootcamp</p>
-            </div>
-        </div>
-    </div>
-    <footer>
-        <p>&copy; TechWorld with Nana. All Rights Reserved.</p>
-        <p>Follow us on:
-            <a href="#" style="color: #3b5998;">Linkedin</a> |
-            <a href="#" style="color: #00aced;">Twitter</a> |
-            <a href="#" style="color: #e4405f;">Instagram</a>
-        </p>
-    </footer>
-</body>
 
+    <h1>Building a Scalable Web Application with Docker, Node.js, Nginx, and HTTPS</h1>
+
+    <div class="section">
+        <h2>Understanding the Architecture</h2>
+        <p>At the core of this architecture lies the concept of load balancing. Web servers must be able to handle millions of requests, and a single server may not suffice to manage this load effectively. To overcome this, we deploy multiple server instances that work together to process incoming traffic. However, managing which server handles which request is critical, and this is where <strong>load balancing algorithms</strong> come into play.</p>
+        <p><strong>Two common load balancing algorithms used by Nginx</strong> are <strong>Least Connections</strong> and <strong>Round Robin</strong>. The Least Connections algorithm routes traffic to the server with the fewest active connections, ensuring more even distribution during periods of high traffic. On the other hand, Round Robin distributes requests evenly across all servers in a rotating fashion. These methods ensure that the application remains responsive, even under heavy loads.</p>
+    </div>
+
+    <div class="section">
+        <h2>Why Use Nginx?</h2>
+        <p><strong>Nginx</strong> acts as both a <strong>reverse proxy</strong> and a <strong>load balancer</strong>. It efficiently handles incoming requests and distributes them to the backend servers based on the chosen algorithm. Additionally, Nginx is capable of caching responses, which speeds up content delivery and reduces the load on backend servers. For example, during peak traffic times—like Netflix on a Friday night—Nginx can compress bandwidth and optimize the distribution of content, ensuring smooth user experiences.</p>
+        <p>Furthermore, Nginx enhances the security of web applications by accepting encrypted traffic via <strong>HTTPS</strong> and forwarding it to the appropriate backend servers. By implementing <strong>SSL/TLS encryption</strong>, Nginx ensures that sensitive data transmitted between clients and the server remains protected from unauthorized access.</p>
+    </div>
+
+    <div class="section">
+        <h2>Project Overview</h2>
+        <p>This project involves building a scalable Node.js application that can run on multiple instances using Docker. With Docker, we can easily package the application and deploy it across multiple containers. These containers will host separate instances of the Node.js application. Nginx will then be configured as a reverse proxy to distribute incoming traffic across these instances, ensuring efficient load balancing.</p>
+        <p>To secure communication, the application will be configured to use <strong>HTTPS</strong> via a <strong>self-signed certificate</strong>, providing encrypted communication between clients and servers.</p>
+    </div>
+
+    <div class="section">
+        <h2>Conclusion</h2>
+        <p>Combining <strong>Node.js</strong>, <strong>Docker</strong>, <strong>Nginx</strong>, and <strong>HTTPS</strong> enables the creation of a robust and scalable web application. Docker allows for seamless scaling of the application, while Nginx ensures that the traffic is efficiently balanced across multiple instances. Additionally, securing the communication with HTTPS guarantees the safety of data in transit. This architecture is ideal for applications that demand high availability and performance, making it suitable for scenarios where traffic spikes are common, such as in e-commerce or media streaming platforms.</p>
+    </div>
+
+</body>
 </html>
